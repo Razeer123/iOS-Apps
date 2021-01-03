@@ -5,7 +5,7 @@ Point of the game is to guess which flag belongs to the country the game asks fo
 very pretty, but it was never the point of this app. 🙄
 
 <p align="center">
-  <img width="640" height="466" src="https://i.postimg.cc/XvNbRRc6/pjimage-2.jpg">
+  <img width="640" height="360" src="https://i.postimg.cc/XvNbRRc6/pjimage-2.jpg">
 </p>
 
 # Implementation 👨‍💻
