@@ -17,14 +17,16 @@ struct ContentView: View {
     var totalPerPerson: Double {
         let peopleCount = Double(numberOfPeople) + 2
         let tipSelection = Double(tipPercentages[tipPercentage])
-        let orderAmount = Double(checkAmount) ?? 0
+        let convertedValue = checkAmount.replacingOccurrences(of: ",", with: ".")
+        let orderAmount = Double(convertedValue) ?? 0
         
         return (orderAmount + orderAmount / 100 * tipSelection) / peopleCount
     }
     
     var totalBill: Double {
         let tipSelection = Double(tipPercentages[tipPercentage])
-        let orderAmount = Double(checkAmount) ?? 0
+        let convertedValue = checkAmount.replacingOccurrences(of: ",", with: ".")
+        let orderAmount = Double(convertedValue) ?? 0
         
         return (orderAmount + orderAmount / 100 * tipSelection)
     }
@@ -54,7 +56,12 @@ struct ContentView: View {
                 }
                 
                 Section(header: Text("Total bill")) {
-                    Text("$\(totalBill, specifier: "%.2f")")
+                    if (tipPercentage == 4) {
+                        Text("$\(totalBill, specifier: "%.2f")")
+                            .markRed()
+                    } else {
+                        Text("$\(totalBill, specifier: "%.2f")")
+                    }
                 }
                 
                 Section(header: Text("Cost per person")) {
@@ -64,6 +71,19 @@ struct ContentView: View {
             }
             .navigationBarTitle("Bill Companion")
         }
+    }
+}
+
+struct markText: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(.red)
+    }
+}
+
+extension View {
+    func markRed() -> some View {
+        self.modifier(markText())
     }
 }
 
