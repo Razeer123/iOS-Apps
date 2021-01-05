@@ -1,7 +1,7 @@
 # Rock Paper Scissors for iOS 🌍
 
 Rock Paper Scissors is a simple iOS game made using SwiftUI framework. It was written entirely by me. Game lets user train his brain by having to choose the correct 
-action in order to get an output defined by the game. After 10 rounds the user is notified about his progress and the game can be played again. Interface is not very 
+action in order to get an output defined by the game. It's worth noting that computer's actions are random every round, which maybe isn't shown on the screenshots below. After 10 rounds the user is notified about his progress and the game can be played again. Interface is not very 
 pretty, but it was never the point of this app. 🙄
 
 <p align="center">
