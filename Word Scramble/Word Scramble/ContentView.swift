@@ -32,14 +32,14 @@ struct ContentView: View {
                     Text($0)
                 }
                 
-                Text("You scored \(roundScore) points this round")
+                Text("You scored \(roundScore) points this game")
                     .padding()
                 
             }
             .navigationBarTitle(rootWord)
             .navigationBarItems(trailing:
                                     Button(action: startGame) {
-                                        Text("Restart")
+                                        Text("Next word")
                                     }
             )
             .onAppear(perform: startGame)
