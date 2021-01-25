@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-class ChangeScreen: ObservableObject {
-    @Published var isStartViewDisplayed  = true
-}
-
 // This struct decides what should be displayed
 
 struct ContentView: View {
@@ -18,14 +14,10 @@ struct ContentView: View {
     @ObservedObject var start = StartViewData()
     
     var body: some View {
-        NavigationView {
-            Group {
-                if (!start.startGame) {
-                    StartView(data: start)
-                } else {
-                    GameView()
-                }
-            }
+        if (!start.startGame) {
+            StartView(data: start)
+        } else {
+            GameView(tasks: $start.tasks)
         }
     }
 }

@@ -11,11 +11,7 @@ struct TaskSet {
     
     var tasks = [Task]()
     
-    init(limit: Int, numberOfQuestions: Int) {
-        tasks = generateTasks(range: limit, numberOfQuestions: numberOfQuestions)
-    }
-    
-    func generateTasks(range: Int, numberOfQuestions: Int) -> [Task] {
+    static func generateTasks(range: Int, numberOfQuestions: Int) -> [Task] {
         
         var temp = [Task]()
         

@@ -9,10 +9,10 @@ import SwiftUI
 import Foundation
 
 struct StartView: View {
-    
-    @State private var multiplicationRange = 5
+
     @State private var questionsToGenerate = 5
     @State private var animateColor = false
+    @State private var dataToPass = [Task]()
     
     @ObservedObject var data: StartViewData
     
@@ -67,11 +67,11 @@ struct StartView: View {
                 
                 HStack {
                     
-                    Text("Range: 1 - \(multiplicationRange)")
+                    Text("Range: 1 - \(data.multiplicationRange)")
                         .padding()
                         .foregroundColor(.black)
                     
-                    Stepper(value: $multiplicationRange, in: 1...12) {
+                    Stepper(value: $data.multiplicationRange, in: 1...12) {
                     }
                     .padding()
                     .frame(width: 100, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
@@ -135,7 +135,7 @@ struct StartView: View {
                         .cornerRadius(buttonCornerRadius)
                         
                         Button(action: {
-                            questionButtonTapped(multiplicationRange * 12)
+                            questionButtonTapped(data.multiplicationRange * 12)
                         }) {
                             Text("All")
                                 .font(.title)
@@ -143,7 +143,7 @@ struct StartView: View {
                         }
                         .frame(width: buttonWidth)
                         .buttonStyle()
-                        .background(self.animateColor ? (data.questionsToGenerate == multiplicationRange * 12 ? Color.green.opacity(opacityValue) : Color.white.opacity(opacityValue)) : Color.white.opacity(opacityValue))
+                        .background(self.animateColor ? (data.questionsToGenerate == data.multiplicationRange * 12 ? Color.green.opacity(opacityValue) : Color.white.opacity(opacityValue)) : Color.white.opacity(opacityValue))
                         .cornerRadius(buttonCornerRadius)
                         
                     }
@@ -159,7 +159,7 @@ struct StartView: View {
                     .buttonStyle()
                     .background(self.animateColor ? (data.startButtonClicked ? Color.green.opacity(opacityValue) : Color.white.opacity(opacityValue)) : Color.white.opacity(opacityValue))
                     .cornerRadius(buttonCornerRadius)
-                    .offset(y: 60)
+                    .offset(y: 50)
                     
                 }
             }
@@ -194,6 +194,7 @@ struct StartView: View {
     func startButtonTapped() {
         
         let delay = 0.3
+        data.tasks = TaskSet.generateTasks(range: data.multiplicationRange, numberOfQuestions: data.questionsToGenerate)
         data.startButtonClicked.toggle()
         
         withAnimation(Animation.easeInOut(duration: animationDuration)) {
