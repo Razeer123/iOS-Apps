@@ -12,12 +12,13 @@ import SwiftUI
 struct ContentView: View {
     
     @ObservedObject var start = StartViewData()
+    @State var endGame = false
     
     var body: some View {
-        if (!start.startGame) {
-            StartView(data: start)
+        if (!start.startGame || endGame) {
+            StartView(data: start, endGame: $endGame)
         } else {
-            GameView(tasks: $start.tasks)
+            GameView(endGame: $endGame, tasks: $start.tasks)
         }
     }
 }

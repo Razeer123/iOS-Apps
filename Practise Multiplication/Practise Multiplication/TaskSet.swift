@@ -21,7 +21,7 @@ struct TaskSet {
                     let result = String(i * j)
                     temp.append(Task(task: "\(i) x \(j) =", answer: result))
                     if (i != j) {
-                        temp.append(Task(task: "\(j) x \(i)", answer: result))
+                        temp.append(Task(task: "\(j) x \(i) =", answer: result))
                     }
                 }
             }

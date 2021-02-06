@@ -15,13 +15,14 @@ struct StartView: View {
     @State private var dataToPass = [Task]()
     
     @ObservedObject var data: StartViewData
+    @Binding var endGame: Bool
     
-    var buttonWidth: CGFloat = 60
-    var buttonHeight: CGFloat = 35
-    var startButtonWidth: CGFloat = 150
-    var buttonCornerRadius: CGFloat = 16
-    var opacityValue = 0.7
-    var spacing: CGFloat = 15
+    let buttonWidth: CGFloat = 60
+    let buttonHeight: CGFloat = 35
+    let startButtonWidth: CGFloat = 150
+    let buttonCornerRadius: CGFloat = 16
+    let opacityValue = 0.7
+    let spacing: CGFloat = 15
     let animationDuration = 0.3
     
     var body: some View {
@@ -170,6 +171,7 @@ struct StartView: View {
         
         data.questionsToGenerate = value
         let delay = 0.3
+        // TODO: Remove it later
         print(value)
         
         if (data.counter == 0) {
@@ -194,6 +196,7 @@ struct StartView: View {
     func startButtonTapped() {
         
         let delay = 0.3
+        endGame = false
         data.tasks = TaskSet.generateTasks(range: data.multiplicationRange, numberOfQuestions: data.questionsToGenerate)
         data.startButtonClicked.toggle()
         
@@ -202,7 +205,7 @@ struct StartView: View {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            data.startGame.toggle()
+            data.startGame = true
         }
         
     }
