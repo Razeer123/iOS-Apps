@@ -20,9 +20,13 @@ struct GameView: View {
     @State var showAlert = false
     @State var animateColor = false
     @State var pickedOption = -1
+    @State var animateIncrease = false
+    @State var animateDecrease = false
+    @State var showText = false
     
     @Binding var endGame: Bool
     @Binding var tasks: [Task]
+    
     let buttonWidth: CGFloat = 60
     let buttonHeight: CGFloat = 25
     let startButtonWidth: CGFloat = 150
@@ -32,23 +36,52 @@ struct GameView: View {
     let iconSize: CGFloat = 25
     let opacityValue = 0.7
     let animationDuration = 0.3
+    let scoreUpdateDuration = 1.0
     
     var body: some View {
         
         ZStack {
             
-            LinearGradient(gradient: /*@START_MENU_TOKEN@*/Gradient(colors: [Color.red, Color.blue])/*@END_MENU_TOKEN@*/, startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [Color.blue, Color.red]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
                 .foregroundColor(.white)
             
             VStack {
-                Text("Score: \(score)")
-                    .foregroundColor(.white)
-                    .font(.title2)
+                ZStack {
+                    
+                    Spacer()
+                        .frame(height: answerSpacing)
+                    
+                    Text("Score: \(score)")
+                        .foregroundColor(animateIncrease ? .green : (animateDecrease ? .red : .white))
+                        .font(.title2)
+                    
+                    Text("+1")
+                        .font(.title2)
+                        .foregroundColor(animateIncrease ? .green : .clear)
+                        .opacity(animateIncrease ? 0 : 1)
+                        .offset(x: 35, y: animateIncrease ? -40 : -20)
+                    
+                    Text("-1")
+                        .font(.title2)
+                        .foregroundColor(animateDecrease ? .red : .clear)
+                        .opacity(animateDecrease ? 0 : 1)
+                        .offset(x: 35, y: animateDecrease ? 50 : 20)
+                    
+                }
+                
                 Spacer()
             }
             
             VStack {
+                
+                Text("Wrong! Try again!")
+                    .foregroundColor(showText ? .red : .clear)
+                    .font(.title)
+                
+                Spacer()
+                    .frame(height: answerSpacing)
+                
                 HStack {
                     Text(tasks[questionNumber].task)
                         .foregroundColor(.white)
@@ -56,12 +89,10 @@ struct GameView: View {
                     Text(answer.isEmpty ? "?" : answer)
                         .foregroundColor(.green)
                         .font(.title)
-                    
                 }
                 
                 Spacer()
                     .frame(height: answerSpacing)
-                
             }
             
             VStack {
@@ -251,7 +282,6 @@ struct GameView: View {
         }
         
         animate()
-        
         answer.append(String(number))
     }
     
@@ -263,7 +293,6 @@ struct GameView: View {
         if (!answer.isEmpty) {
             answer.removeLast()
         }
-        
         return
     }
     
@@ -274,17 +303,35 @@ struct GameView: View {
         
         if (answer == tasks[questionNumber].answer) {
             score += 1
+            
+            withAnimation(Animation.easeInOut(duration: scoreUpdateDuration)) {
+                animateIncrease.toggle()
+            }
+            
             checkEndGame()
             return true
         }
         if (score > 0) {
             score -= 1
+            
+            withAnimation(Animation.easeInOut(duration: scoreUpdateDuration)) {
+                animateDecrease.toggle()
+            }
+            
+        }
+        withAnimation(Animation.easeInOut(duration: scoreUpdateDuration)) {
+            showText.toggle()
         }
         checkEndGame()
         return false
     }
     
     func checkEndGame() {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + scoreUpdateDuration) {
+            restoreDefault()
+        }
+        
         if (questionNumber == tasks.count - 1) {
             start.questionsToGenerate = 0
             start.multiplicationRange = 0
@@ -307,6 +354,13 @@ struct GameView: View {
             }
         }
     }
+    
+    func restoreDefault() {
+        animateDecrease = false
+        animateIncrease = false
+        showText = false
+    }
+    
 }
 
 struct numericalButton: ViewModifier {

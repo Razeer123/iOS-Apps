@@ -29,16 +29,7 @@ struct StartView: View {
         
         ZStack {
             
-            // TODO: Add cool gradient to it (blue to violet or sth)
-            
-            /*Image("AppBackground")
-             .resizable()
-             .scaledToFill()
-             .blur(radius: 10.0)
-             .offset(x: -30)
-             .edgesIgnoringSafeArea(.all)*/
-            
-            LinearGradient(gradient: /*@START_MENU_TOKEN@*/Gradient(colors: [Color.red, Color.blue])/*@END_MENU_TOKEN@*/, startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [Color.blue, Color.red]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
@@ -53,7 +44,6 @@ struct StartView: View {
                 
                 Spacer()
                     .frame(height: 580)
-                
                 
             }
             
@@ -115,7 +105,6 @@ struct StartView: View {
                         .buttonStyle()
                         .background(self.animateColor ? (data.questionsToGenerate == 10 ? Color.green.opacity(opacityValue) : Color.white.opacity(opacityValue)) : Color.white.opacity(opacityValue))
                         .cornerRadius(buttonCornerRadius)
-                        
                     }
                     
                     Spacer()
@@ -171,8 +160,6 @@ struct StartView: View {
         
         data.questionsToGenerate = value
         let delay = 0.3
-        // TODO: Remove it later
-        print(value)
         
         if (data.counter == 0) {
             withAnimation(Animation.easeInOut(duration: animationDuration)) {
@@ -198,7 +185,7 @@ struct StartView: View {
         let delay = 0.3
         endGame = false
         data.tasks = TaskSet.generateTasks(range: data.multiplicationRange, numberOfQuestions: data.questionsToGenerate)
-        data.startButtonClicked.toggle()
+        data.startButtonClicked = true
         
         withAnimation(Animation.easeInOut(duration: animationDuration)) {
             self.animateColor.toggle()
@@ -207,7 +194,6 @@ struct StartView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             data.startGame = true
         }
-        
     }
 }
 

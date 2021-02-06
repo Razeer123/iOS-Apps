@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-// This struct decides what should be displayed
-
 struct ContentView: View {
     
     @ObservedObject var start = StartViewData()
@@ -22,8 +20,6 @@ struct ContentView: View {
         }
     }
 }
-
-// Additional views are created below
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
