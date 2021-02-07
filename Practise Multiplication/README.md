@@ -1,4 +1,4 @@
-# Practise Multiplication ✖️
+# Practise Multiplication 🧮
 
 Practise Multiplication is a simple, multi-view app made using SwiftUI framework. **This app was created entirely by me.** Its goal is very simple - user selects the
 number and range of question and the app generates them. During the gameplay player is informed about his score and wheter the answer was correct or not. Everything
