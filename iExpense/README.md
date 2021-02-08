@@ -5,7 +5,7 @@ expense. It's shown in a list, from which certain items can be deleted by gestur
 again. Data is stored in a JSON file. 
 
 <p align="center">
-  <img width="765" height="482" src="https://i.postimg.cc/rss8BRFT/merge-from-ofoct-4.jpg">
+  <img width="765" height="482" src="https://i.postimg.cc/y8MSsJjh/merge-from-ofoct-5.jpg">
 </p>
 
 # Implementation 👨‍💻
