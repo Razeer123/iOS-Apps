@@ -16,6 +16,7 @@ struct AddView: View {
     @State private var name = ""
     @State private var type = "Personal"
     @State private var amount = ""
+    @State private var showAlert = false
     
     static let types = ["Business", "Personal"]
     
@@ -41,10 +42,19 @@ struct AddView: View {
                                             let item = ExpenseItem(name: self.name, type: self.type, amount: actualAmount)
                                             self.expenses.items.append(item)
                                             self.presentationMode.wrappedValue.dismiss()
+                                        } else {
+                                            showAlert.toggle()
                                         }
                                     }
             )
         }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Incorrect input"), message: Text("Bro, this field seeks for integers"), dismissButton: .default(Text("Sure homie")))
+        }
+    }
+    
+    func checkCorrectness(amount: String) -> Bool {
+        return Int(amount) != nil
     }
 }
 
