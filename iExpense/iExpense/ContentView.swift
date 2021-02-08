@@ -62,6 +62,7 @@ struct ContentView: View {
                         
                         Spacer()
                         Text("$\(item.amount)")
+                            .foregroundColor(item.amount < 10 ? Color.green : (item.amount < 100 ? Color.orange : Color.red))
                     }
                 }
                 .onDelete(perform: removeItems)
@@ -69,7 +70,7 @@ struct ContentView: View {
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("iExpense")
-            .navigationBarItems(trailing:
+            .navigationBarItems(leading: EditButton(), trailing:
                                     Button(action: {
                                         self.showingAddExpense = true
                                     }) {
