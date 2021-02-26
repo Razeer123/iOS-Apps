@@ -1,7 +1,7 @@
 # My iOS Apps 📱
 
 This repository stores all iOS apps that I've written at the beginning of my journey with Swift and SwiftUI framework. Every folder here is a whole different
-project which was either fully created by myself or came from Hacking with Swift website. It's explicitly states which app was written from beginning to the end by me. Each project tries to show different module (or combination of modules) from SwiftUI framework in action. 
+project which was either fully created by myself or came from Hacking with Swift website. It's explicitly stated which app was written from the beginning to the end by me. Each project tries to show a different module (or combination of modules) from SwiftUI framework in action. 
 
 # Projects 👨‍💻
 
