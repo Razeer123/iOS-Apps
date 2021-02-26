@@ -12,19 +12,23 @@ struct ProblemView: View {
     let problem: LeetProblem
     let doneProblems: Int
     let difficulty: String = "Hard"
+    let formatter = DateFormatter()
+    let numberOfProblems = 1771
     
     var body: some View {
         NavigationView {
             ScrollView(.vertical) {
                 VStack {
                     
-                    HStack {
-                        VStack {
-                            Text(problem.notes)
+                    if (!problem.notes.isEmpty) {
+                        HStack {
+                            VStack {
+                                Text(problem.notes)
+                            }
+                            Spacer()
                         }
-                        Spacer()
+                        .padding()
                     }
-                    .padding()
                     
                     HStack {
                         VStack {
@@ -63,7 +67,7 @@ struct ProblemView: View {
                             Text("Solved")
                         }
                         VStack {
-                            Text("\(doneProblems) / 1330")
+                            Text("\(doneProblems) / \(numberOfProblems)")
                                 .fontWeight(.bold)
                                 .foregroundColor(.green)
                         }
@@ -76,11 +80,28 @@ struct ProblemView: View {
                     }
                     .padding()
                     
+                    HStack {
+                        VStack {
+                            Text("Added:")
+                        }
+                        VStack {
+                            Text("\(formatter.string(from: problem.addedDate))")
+                                .fontWeight(.bold)
+                                .foregroundColor(.green)
+                        }
+                        Spacer()
+                    }
+                    .padding()
+                    
+                    VStack {
+                        Text("Track your progress")
+                            .font(.headline)
+                    }
+                    
                     // draw chart here
                     
-                    Spacer()
-                    
                 }
+                Spacer()
             }
             .navigationBarTitle(problem.name)
         }

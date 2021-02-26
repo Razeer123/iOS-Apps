@@ -44,7 +44,7 @@ struct AddProblemView: View {
             .navigationBarTitle("Add new problem")
             .navigationBarItems(trailing:
                                     Button("Save") {
-                                        let problem = LeetProblem(name: self.name, language: self.language, difficulty: self.difficulty, notes: self.notes)
+                                        let problem = LeetProblem(name: self.name, language: self.language, difficulty: self.difficulty, notes: self.notes, addedDate: Date())
                                         self.problems.problems.append(problem)
                                         self.presentationMode.wrappedValue.dismiss()
                                     }
