@@ -6,103 +6,61 @@
 //
 
 import SwiftUI
+import Charts
 
 struct ProblemView: View {
     
     let problem: LeetProblem
     let doneProblems: Int
-    let difficulty: String = "Hard"
     let formatter = DateFormatter()
     let numberOfProblems = 1771
     
+    // Things that are here will change - right now I'm just writing interfaces and app logic
+    
     var body: some View {
-        NavigationView {
-            ScrollView(.vertical) {
-                VStack {
-                    
-                    if (!problem.notes.isEmpty) {
-                        HStack {
-                            VStack {
-                                Text(problem.notes)
-                            }
-                            Spacer()
-                        }
-                        .padding()
-                    }
-                    
-                    HStack {
-                        VStack {
-                            Text("Written in:")
-                        }
-                        VStack {
-                            Text(problem.language)
-                                .fontWeight(.bold)
-                                .foregroundColor(.purple)
-                        }
-                        
-                        Spacer()
-                        
-                    }
-                    .padding()
-                    
-                    HStack {
-                        
-                        VStack {
-                            Text("Difficulty:")
-                        }
-                        
-                        VStack {
-                            Text(problem.difficulty)
-                                .fontWeight(.bold)
-                                .foregroundColor(difficulty == "easy" ? Color.green : (difficulty == "medium" ? Color.orange : Color.red))
-                        }
-                        
-                        Spacer()
-                        
-                    }
-                    .padding(.horizontal)
-                    
-                    HStack {
-                        VStack {
-                            Text("Solved")
-                        }
-                        VStack {
-                            Text("\(doneProblems) / \(numberOfProblems)")
-                                .fontWeight(.bold)
-                                .foregroundColor(.green)
-                        }
-                        VStack {
-                            Text("problems in \(problem.language)")
-                        }
-                        
-                        Spacer()
-                        
-                    }
-                    .padding()
-                    
-                    HStack {
-                        VStack {
-                            Text("Added:")
-                        }
-                        VStack {
-                            Text("\(formatter.string(from: problem.addedDate))")
-                                .fontWeight(.bold)
-                                .foregroundColor(.green)
-                        }
-                        Spacer()
-                    }
-                    .padding()
-                    
-                    VStack {
-                        Text("Track your progress")
-                            .font(.headline)
-                    }
-                    
-                    // draw chart here
-                    
+        Form {
+            if (!problem.notes.isEmpty) {
+                Section(header: Text("Problem notes")) {
+                    Text(problem.notes)
                 }
-                Spacer()
             }
+            
+            Section(header: Text("Language")) {
+                Text(problem.language)
+            }
+            
+            Section(header: Text("Difficulty")) {
+                Text(problem.difficulty)
+                    .foregroundColor(problem.difficulty == "Easy" ? .green : (problem.difficulty == "Medium" ? .orange : .red))
+            }
+            
+            Section(header: Text("Problems done")) {
+                HStack {
+                    Text("Solved")
+                    Text("\(doneProblems) / \(numberOfProblems)")
+                        .foregroundColor(.blue)
+                    Text("problems in \(problem.language)")
+                }
+            }
+            
+            Section() {
+                
+                VStack {
+                    Chart(data: [0.1, 0.3, 0.2, 0.5, 0.4, 0.9, 0.1, 0.1, 0.3, 0.2, 0.5, 0.4, 0.9, 0.1, 0.1, 0.3, 0.2, 0.5, 0.4, 0.9, 0.1, 0.1, 0.3, 0.2, 0.5, 0.4, 0.9, 0.1, 0.1, 0.3, 0.2, 0.5, 0.4, 0.9, 0.1])
+                        .chartStyle(
+                            ColumnChartStyle(column: Capsule().foregroundColor(.green), spacing: 2)
+                        )
+                    
+                    Spacer()
+                        .frame(height: 10)
+                    
+                    Text("Your daily progress")
+                        .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .font(.subheadline)
+                }
+            }
+            .frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+            
             .navigationBarTitle(problem.name)
         }
     }
