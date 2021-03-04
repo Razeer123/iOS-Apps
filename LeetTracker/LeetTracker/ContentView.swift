@@ -147,67 +147,61 @@ struct StatsView: View {
     var body: some View {
         
         NavigationView {
-            ScrollView(.vertical) {
-                
-                Text("Choose language")
-                    .bold()
-                
-                Picker("Language", selection: $language) {
-                    ForEach(Self.languages, id: \.self) {
-                        Text($0)
-                    }
-                }
-                
-                Text("\(language) stats")
-                    .bold()
-                
-                PieChartView(data: [Double(MainView().checkYeetedProblems(language: language)), numberOfProblems], title: language)
-                
-                HStack {
-                    VStack {
-                        Text("You solved")
-                    }
-                    VStack {
-                        Text("\(MainView().checkYeetedProblems(language: language)) / \(Int(numberOfProblems))")
-                            .fontWeight(.bold)
-                            .foregroundColor(.blue)
-                    }
-                    VStack {
-                        Text("problems in \(language)")
-                    }
-                    
-                    Spacer()
-                    
-                }
-                .padding(10)
-                
-                
-                HStack {
-                    VStack {
-                        Text("Average difficulty in \(language) was:")
-                    }
-                    VStack {
-                        if (MainView().checkAverageDiffuculty(language: language) == 1.0) {
-                            Text("easy")
-                                .bold()
-                                .foregroundColor(.green)
-                        } else if (MainView().checkAverageDiffuculty(language: language) <= 2.0) {
-                            Text("medium")
-                                .bold()
-                                .foregroundColor(.orange)
-                        } else {
-                            Text("medium")
-                                .bold()
-                                .foregroundColor(.red)
+            Form {
+                Section(header: Text("Select language")) {
+                    Picker("Language", selection: $language) {
+                        ForEach(Self.languages, id: \.self) {
+                            Text($0)
                         }
                     }
-                    
-                    Spacer()
-                    
                 }
-                .padding(10)
                 
-                Spacer()
+                Section(header: Text("Problems done")) {
+                    HStack {
+                        Text("Solved")
+                        Text("\(MainView().checkYeetedProblems(language: language)) / \(Int(numberOfProblems))")
+                            .foregroundColor(.blue)
+                        Text("problems in \(language)")
+                    }
+                }
+                
+                Section(header: Text("Average difficulty")) {
+                    
+                    if (MainView().checkAverageDiffuculty(language: language) == 1.0) {
+                        Text("easy")
+                            .foregroundColor(.green)
+                    } else if (MainView().checkAverageDiffuculty(language: language) <= 2.0) {
+                        Text("medium")
+                            .foregroundColor(.orange)
+                    } else {
+                        Text("medium")
+                            .foregroundColor(.red)
+                    }
+                }
+                
+                Section() {
+                    VStack {
+                        
+                        PieChartView(data: [Double(MainView().checkYeetedProblems(language: language)), numberOfProblems], title: "Solved problems")
+                        
+                        Spacer()
+                            .frame(height: 35)
+                        
+                        Divider()
+                            .edgesIgnoringSafeArea(.all)
+                        
+                        Spacer()
+                            .frame(height: 10)
+                        
+                        
+                        Text("Problems solved in \(language)")
+                            .bold()
+                            .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .font(.subheadline)
+                        
+                    }
+                }
+                .frame(height: 350)
                 
             }
             .navigationTitle("Stats")

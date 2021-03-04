@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C55DA21325E7177000D6BD22 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = C55DA21225E7177000D6BD22 /* Charts */; };
-		C55DA21725E7ACD900D6BD22 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = C55DA21625E7ACD900D6BD22 /* SwiftUICharts */; };
+		C55EF5F825F0D7A500CC811A /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = C55EF5F725F0D7A500CC811A /* SwiftUICharts */; };
 		C5E3988325E2FCA900DDFD40 /* LeetTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E3988225E2FCA900DDFD40 /* LeetTrackerApp.swift */; };
 		C5E3988525E2FCA900DDFD40 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E3988425E2FCA900DDFD40 /* ContentView.swift */; };
 		C5E3988725E2FCAD00DDFD40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5E3988625E2FCAD00DDFD40 /* Assets.xcassets */; };
@@ -34,7 +34,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C55DA21325E7177000D6BD22 /* Charts in Frameworks */,
-				C55DA21725E7ACD900D6BD22 /* SwiftUICharts in Frameworks */,
+				C55EF5F825F0D7A500CC811A /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,7 +97,7 @@
 			name = LeetTracker;
 			packageProductDependencies = (
 				C55DA21225E7177000D6BD22 /* Charts */,
-				C55DA21625E7ACD900D6BD22 /* SwiftUICharts */,
+				C55EF5F725F0D7A500CC811A /* SwiftUICharts */,
 			);
 			productName = LeetTracker;
 			productReference = C5E3987F25E2FCA900DDFD40 /* LeetTracker.app */;
@@ -128,7 +128,7 @@
 			mainGroup = C5E3987625E2FCA900DDFD40;
 			packageReferences = (
 				C55DA21125E7177000D6BD22 /* XCRemoteSwiftPackageReference "swiftui-charts" */,
-				C55DA21525E7ACD900D6BD22 /* XCRemoteSwiftPackageReference "ChartView" */,
+				C55EF5F625F0D7A500CC811A /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = C5E3988025E2FCA900DDFD40 /* Products */;
 			projectDirPath = "";
@@ -358,7 +358,7 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		C55DA21525E7ACD900D6BD22 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+		C55EF5F625F0D7A500CC811A /* XCRemoteSwiftPackageReference "ChartView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AppPear/ChartView";
 			requirement = {
@@ -374,9 +374,9 @@
 			package = C55DA21125E7177000D6BD22 /* XCRemoteSwiftPackageReference "swiftui-charts" */;
 			productName = Charts;
 		};
-		C55DA21625E7ACD900D6BD22 /* SwiftUICharts */ = {
+		C55EF5F725F0D7A500CC811A /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C55DA21525E7ACD900D6BD22 /* XCRemoteSwiftPackageReference "ChartView" */;
+			package = C55EF5F625F0D7A500CC811A /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */

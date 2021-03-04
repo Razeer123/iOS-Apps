@@ -34,15 +34,6 @@ struct ProblemView: View {
                     .foregroundColor(problem.difficulty == "Easy" ? .green : (problem.difficulty == "Medium" ? .orange : .red))
             }
             
-            Section(header: Text("Problems done")) {
-                HStack {
-                    Text("Solved")
-                    Text("\(doneProblems) / \(numberOfProblems)")
-                        .foregroundColor(.blue)
-                    Text("problems in \(problem.language)")
-                }
-            }
-            
             Section() {
                 
                 VStack {
