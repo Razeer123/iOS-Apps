@@ -14,6 +14,7 @@ struct ProblemView: View {
     let doneProblems: Int
     let formatter = DateFormatter()
     let numberOfProblems = 1771
+    let secondsInDay: Double = 60 * 60 * 24
     
     // Things that are here will change - right now I'm just writing interfaces and app logic
     
@@ -36,11 +37,58 @@ struct ProblemView: View {
             
             Section() {
                 
+                let formatter = initializeFormatter()
+                let secondsInTwoDays = secondsInDay * 2
+                let secondsInThreeDays = secondsInDay * 3
+                let secondsInFourDays = secondsInDay * 4
+                
                 VStack {
-                    Chart(data: [0.1, 0.3, 0.2, 0.5, 0.4, 0.9, 0.1, 0.1, 0.3, 0.2, 0.5, 0.4, 0.9, 0.1, 0.1, 0.3, 0.2, 0.5, 0.4, 0.9, 0.1, 0.1, 0.3, 0.2, 0.5, 0.4, 0.9, 0.1, 0.1, 0.3, 0.2, 0.5, 0.4, 0.9, 0.1])
-                        .chartStyle(
-                            ColumnChartStyle(column: Capsule().foregroundColor(.green), spacing: 2)
-                        )
+                    HStack {
+                        
+                        Spacer()
+                            .frame(width: 55)
+                        
+                        Chart(data: [0.1, 0.2, 0.3, 0.4, 0.5].reversed())
+                            .chartStyle(
+                                ColumnChartStyle(column: Capsule().foregroundColor(.green).frame(width: 10), spacing: 2)
+                            )
+                        
+                        Spacer()
+                            .frame(width: 55)
+                    }
+                    
+                    Spacer()
+                        .frame(height: 10)
+                    
+                    HStack {
+                        Text(formatter.string(from: Date().addingTimeInterval(-secondsInFourDays)))
+                            .font(.system(size: 10))
+                            .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        Spacer()
+                            .frame(width: 10)
+                        
+                        Text(formatter.string(from: Date().addingTimeInterval(-secondsInThreeDays)))
+                            .font(.system(size: 10))
+                            .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        Spacer()
+                            .frame(width: 10)
+                        
+                        Text(formatter.string(from: Date().addingTimeInterval(-secondsInTwoDays)))
+                            .font(.system(size: 10))
+                            .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        Spacer()
+                            .frame(width: 10)
+                        
+                        Text(formatter.string(from: Date().addingTimeInterval(-secondsInDay)))
+                            .font(.system(size: 10))
+                            .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        Spacer()
+                            .frame(width: 10)
+                        
+                        Text(formatter.string(from: Date()))
+                            .font(.system(size: 10))
+                            .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    }
                     
                     Spacer()
                         .frame(height: 10)
@@ -55,6 +103,13 @@ struct ProblemView: View {
             .navigationBarTitle(problem.name)
         }
     }
+    
+    func initializeFormatter() -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM"
+        return formatter
+    }
+    
 }
 
 struct ProblemView_Previews: PreviewProvider {
