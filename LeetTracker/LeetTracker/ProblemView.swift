@@ -15,6 +15,7 @@ struct ProblemView: View {
     let formatter = DateFormatter()
     let numberOfProblems = 1771
     let secondsInDay: Double = 60 * 60 * 24
+    let dailyGoal = 5
     
     // Things that are here will change - right now I'm just writing interfaces and app logic
     
@@ -110,6 +111,14 @@ struct ProblemView: View {
         return formatter
     }
     
+    func calculateProblemsSolved(count: Int) -> Double {
+        
+        if (count <= dailyGoal) {
+            return Double(count * 2 / 10)
+        } else {
+            return 1.0
+        }
+    }
 }
 
 struct ProblemView_Previews: PreviewProvider {
