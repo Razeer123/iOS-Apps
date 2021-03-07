@@ -22,7 +22,7 @@ From newest and most exciting to oldest.
 
 From newest and most exciting to oldest.
 
-1. **ImageViewer** - simple app working as a simple image viewer.
+1. **ImageViewer** - simple app working as a basic image viewer.
 
 # Frameworks I've worked with 🤖
 
