@@ -10,6 +10,8 @@ import SwiftUI
 struct CheckoutView: View {
     
     @ObservedObject var order: Order
+    @State private var confirmationMessege = ""
+    @State private var showingConfirmation = false
     
     var body: some View {
         GeometryReader { geo in
@@ -20,17 +22,51 @@ struct CheckoutView: View {
                         .scaledToFit()
                         .frame(width: geo.size.width)
                     
-                    Text("Your totalis $\(self.order.cost, specifier: "%.2f")")
+                    Text("Your total is $\(self.order.cost, specifier: "%.2f")")
                         .font(.title)
                     
                     Button("Place order") {
-                        // place the order
+                        self.placeOrder()
                     }
                     .padding()
                 }
             }
         }
         .navigationBarTitle("Check out", displayMode: .inline)
+        .alert(isPresented: $showingConfirmation) {
+            Alert(title: Text("Thank you!"), message: Text(confirmationMessege), dismissButton: .default(Text("OK")))
+        }
+    }
+    
+    func placeOrder() {
+        
+        guard let encoded = try? JSONEncoder().encode(order) else {
+            print("Failed to encode order")
+            return
+        }
+        
+        // Let's us test the program with a real server-client communication
+        let url = URL(string: "https://reqres.in/api/cupcakes")!
+        var request = URLRequest(url: url)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        request.httpBody = encoded
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data else {
+                print("No data in response: \(error?.localizedDescription ?? "Unknown error").")
+                return
+            }
+            
+            if let decodedOrder = try? JSONDecoder().decode(Order.self, from: data) {
+                self.confirmationMessege = "Your order for \(decodedOrder.quantity) x \(Order.types[decodedOrder.type].lowercased()) cupcakes is on its way!"
+                self.showingConfirmation = true
+            } else {
+                print("Invalid response from server")
+            }
+            
+        }.resume()
     }
 }
 
