@@ -13,6 +13,7 @@
 		C5FCC184262A0311000C5F89 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5FCC183262A0311000C5F89 /* Preview Assets.xcassets */; };
 		C5FCC191262A158E000C5F89 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FCC190262A158E000C5F89 /* Order.swift */; };
 		C5FCC194262A1C7E000C5F89 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FCC193262A1C7E000C5F89 /* AddressView.swift */; };
+		C5FCC197262A20FF000C5F89 /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FCC196262A20FF000C5F89 /* CheckoutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		C5FCC185262A0311000C5F89 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5FCC190262A158E000C5F89 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		C5FCC193262A1C7E000C5F89 /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
+		C5FCC196262A20FF000C5F89 /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				C5FCC17C262A030F000C5F89 /* CupcakeCornerApp.swift */,
 				C5FCC17E262A030F000C5F89 /* ContentView.swift */,
+				C5FCC196262A20FF000C5F89 /* CheckoutView.swift */,
 				C5FCC180262A0311000C5F89 /* Assets.xcassets */,
 				C5FCC185262A0311000C5F89 /* Info.plist */,
 				C5FCC182262A0311000C5F89 /* Preview Content */,
@@ -146,6 +149,7 @@
 			files = (
 				C5FCC191262A158E000C5F89 /* Order.swift in Sources */,
 				C5FCC194262A1C7E000C5F89 /* AddressView.swift in Sources */,
+				C5FCC197262A20FF000C5F89 /* CheckoutView.swift in Sources */,
 				C5FCC17F262A030F000C5F89 /* ContentView.swift in Sources */,
 				C5FCC17D262A030F000C5F89 /* CupcakeCornerApp.swift in Sources */,
 			);
