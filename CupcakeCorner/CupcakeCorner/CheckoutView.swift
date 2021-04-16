@@ -11,6 +11,7 @@ struct CheckoutView: View {
     
     @ObservedObject var order: Order
     @State private var confirmationMessege = ""
+    @State private var notificationTitle = ""
     @State private var showingConfirmation = false
     
     var body: some View {
@@ -34,7 +35,7 @@ struct CheckoutView: View {
         }
         .navigationBarTitle("Check out", displayMode: .inline)
         .alert(isPresented: $showingConfirmation) {
-            Alert(title: Text("Thank you!"), message: Text(confirmationMessege), dismissButton: .default(Text("OK")))
+            Alert(title: Text(notificationTitle), message: Text(confirmationMessege), dismissButton: .default(Text("OK")))
         }
     }
     
@@ -56,11 +57,15 @@ struct CheckoutView: View {
             
             guard let data = data else {
                 print("No data in response: \(error?.localizedDescription ?? "Unknown error").")
+                self.confirmationMessege = "Your order failed. Please check your internet connection and try again."
+                self.notificationTitle = "Something went wrong"
+                self.showingConfirmation = true
                 return
             }
             
             if let decodedOrder = try? JSONDecoder().decode(Order.self, from: data) {
                 self.confirmationMessege = "Your order for \(decodedOrder.quantity) x \(Order.types[decodedOrder.type].lowercased()) cupcakes is on its way!"
+                self.notificationTitle = "Thank you!"
                 self.showingConfirmation = true
             } else {
                 print("Invalid response from server")
